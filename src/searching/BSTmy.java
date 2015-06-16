@@ -79,7 +79,7 @@ public class BSTmy<Key extends Comparable<Key>, Value>{
 			return null;
 		Node cur = n;
 		while(cur != null){
-			int cmp = k.compareTo(n.key);
+			int cmp = k.compareTo(cur.key);
 			if(cmp > 0)
 				cur = cur.right;
 			else if(cmp < 0)
@@ -442,7 +442,20 @@ public class BSTmy<Key extends Comparable<Key>, Value>{
 			q.enqueue(n.key);
 		if(cmphi > 0)
 			keys(q, n.right, lo, hi);
-		
-
+	}
+	
+	public boolean contains(Key k){
+		return contains(root, k);
+	}
+	
+	public boolean contains(Node n, Key k){
+		if(n == null)
+			return false;
+		int cmp = k.compareTo(n.key);
+		if(cmp > 0)
+			return contains(n.right, k);
+		if(cmp < 0)
+			return contains(n.left, k);
+		return true;
 	}
 }

@@ -19,7 +19,7 @@ public class Union_find2{
 		}
 		N = n;
 	}
-	
+	//rootp 变量名太长了
 	public void union(int p, int q){
 		int rootp = find(p);
 		int rootq = find(q);

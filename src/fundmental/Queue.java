@@ -75,6 +75,16 @@ public class Queue<Item> implements Iterable<Item>{
 	public int size(){
 		return size;
 	}
+	
+	public String toString(){
+		StringBuffer s = new StringBuffer();
+		Node n = first;
+		while(n != null){
+			s.append(" ").append(n.item);
+			n = n.next;
+		}
+		return s.toString();
+	}
 
 	public static void main(String [] args){
 		String []test = "to be or not to - be - - that - - - is".split(" ");

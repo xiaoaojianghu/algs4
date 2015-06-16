@@ -15,6 +15,9 @@ public class Graph{
 		public Node(int i){
 			no = i;
 		}
+		public Node(){
+			
+		}
 	}
 	private Node[] nodes;
 	private int e;
@@ -33,11 +36,11 @@ public class Graph{
 			nodes[i] = new Node(i);
 		line = s.nextLine();
 		e = Integer.parseInt(line);	
-		line = s.nextLine();
-		while(line != null){
+		while(s.hasNextLine()){
+			line = s.nextLine();
 			String[] t = line.split(" ");
 			addEdge(Integer.parseInt(t[0]), Integer.parseInt(t[1]));
-			line = s.nextLine();
+			
 		}
 	}
 	public int V(){
@@ -48,7 +51,7 @@ public class Graph{
 		return e;
 	}
 
-	public void addEdge(int v, int w){
+	public void addEdgeBefore(int v, int w){
 		Node n = nodes[v];
 		Node p = n;
 		while(n != null){
@@ -58,6 +61,15 @@ public class Graph{
 		p.next = nodes[w];
 	}
 
+	public void addEdge(int v, int w){
+		Node n = nodes[v];
+		Node p = n;
+		while(n != null){
+			p = n;
+			n = n.next;
+		}
+		p.next = new Node(w);
+	}
 	public Iterable<Integer> adj(int v){
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		Node n = nodes[v].next;
@@ -72,7 +84,7 @@ public class Graph{
 		String s = "";
 		for(Node n : nodes){
 			Node to = n.next;
-			while(to.next != null){
+			while(to != null){
 				s = s + n.no + " " + to.no + " ";
 				to = to.next;
 			}

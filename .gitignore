@@ -1,0 +1,12 @@
+/1Kints.txt
+/tinyUF.txt.bak
+
+*.class
+*.txt
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+/txt

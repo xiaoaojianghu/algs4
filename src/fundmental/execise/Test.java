@@ -3,7 +3,6 @@ package fundmental.execise;
 public class Test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 //		System.out.println(ex(6));
 		int n = 15;
 //		for(int j = 0; j <= 10000; j++){
@@ -16,6 +15,8 @@ public class Test {
 		String s2 = s;
 		s2 = "'";
 		System.out.println(s);
+		int[] a = {};
+		System.out.println(a.length);
 	}
 
 	public static void test(){

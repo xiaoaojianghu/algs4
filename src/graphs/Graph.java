@@ -3,37 +3,29 @@ package graphs;
 import java.util.*;
 
 public class Graph{
-	//用引用表示边是不可行的, 得用节点
-	private class Node{
-		int val;
-		int no;
-		Node next;
-		public String toString(){
-			return no + "";
-		}
-		
-		public Node(int i){
-			no = i;
-		}
-		public Node(){
-			
-		}
-	}
-	private Node[] nodes;
+	//书上用的Bag
+	private final int v;
 	private int e;
+	private LinkedList<Integer>[] list;
 
 	public Graph(int v){
-		nodes = new Node[v];
-		for(int i = 0; i < nodes.length; i++)
-			nodes[i] = new Node(i);
+		list = new LinkedList[v];
+		for(int i = 0; i < v; i++){
+			list[i] = new LinkedList<Integer>();
+		}
+		this.v = v;
 	}
 
 	public Graph(Scanner s){
 		String line = s.nextLine();
 		int ns = Integer.parseInt(line);
-		nodes = new Node[ns];
-		for(int i = 0; i < nodes.length; i++)
-			nodes[i] = new Node(i);
+		
+		this.v = ns;
+		list = new LinkedList[v];
+		for(int i = 0; i < v; i++){
+			list[i] = new LinkedList<Integer>();
+		}
+		
 		line = s.nextLine();
 		e = Integer.parseInt(line);	
 		while(s.hasNextLine()){
@@ -44,49 +36,32 @@ public class Graph{
 		}
 	}
 	public int V(){
-		return nodes.length;
+		return v;
 	}
 
 	public int E(){
 		return e;
 	}
 
-	public void addEdgeBefore(int v, int w){
-		Node n = nodes[v];
-		Node p = n;
-		while(n != null){
-			p = n;
-			n = n.next;
-		}
-		p.next = nodes[w];
-	}
-
+	
 	public void addEdge(int v, int w){
-		Node n = nodes[v];
-		Node p = n;
-		while(n != null){
-			p = n;
-			n = n.next;
-		}
-		p.next = new Node(w);
+		list[v].add(w);
+		list[w].add(v);
 	}
 	public Iterable<Integer> adj(int v){
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		Node n = nodes[v].next;
-		while(n != null){
-			list.add(n.no);
-			n = n.next;
+		int len = list[v].size();
+		Integer[] a = new Integer[len];
+		for(int i = 0; i < len; i++){
+			a[i] = list[v].get(i);
 		}
-		return list;
+		return a;
 	}
 
 	public String toString(){
 		String s = "";
-		for(Node n : nodes){
-			Node to = n.next;
-			while(to != null){
-				s = s + n.no + " " + to.no + " ";
-				to = to.next;
+		for(int i = 0; i < list.length; i++){
+			for(int j : list[i]){
+				s = s + i + " " + j + "|";
 			}
 			s += "\n";
 		}	

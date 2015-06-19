@@ -34,11 +34,12 @@ public class Graph{
 	public int E(){
 		return e;
 	}
-
 	
+	//改成跟书上一样
+	//书上用的bag, 添加元素都是到队首
 	public void addEdge(int v, int w){
-		list[v].add(w);
-		list[w].add(v);
+		list[v].addFirst(w);
+		list[w].addFirst(v);
 		e++;
 	}
 

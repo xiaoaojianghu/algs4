@@ -17,16 +17,8 @@ public class Graph{
 	}
 
 	public Graph(Scanner s){
+		this(Integer.parseInt(s.nextLine()));
 		String line = s.nextLine();
-		int ns = Integer.parseInt(line);
-		
-		this.v = ns;
-		list = new LinkedList[v];
-		for(int i = 0; i < v; i++){
-			list[i] = new LinkedList<Integer>();
-		}
-		
-		line = s.nextLine();
 		e = Integer.parseInt(line);	
 		while(s.hasNextLine()){
 			line = s.nextLine();
@@ -47,14 +39,11 @@ public class Graph{
 	public void addEdge(int v, int w){
 		list[v].add(w);
 		list[w].add(v);
+		e++;
 	}
+
 	public Iterable<Integer> adj(int v){
-		int len = list[v].size();
-		Integer[] a = new Integer[len];
-		for(int i = 0; i < len; i++){
-			a[i] = list[v].get(i);
-		}
-		return a;
+		return list[v];
 	}
 
 	public String toString(){

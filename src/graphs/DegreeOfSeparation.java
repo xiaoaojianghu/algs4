@@ -3,17 +3,18 @@ import java.util.*;
 public class DegreeOfSeparation{
 	private boolean mark[];
 	private Queue<Integer> q;
-	private LinkedList<Integer> path;
+	private int[] path;
 	private SymbolGraph sg;
-	public DegreeOfSeparation(String src, String to) throws Exception{
+	private int src, to;
+	public DegreeOfSeparation(String s, String t) throws Exception{
 			sg = new SymbolGraph("", "/");
 			Graph g = sg.G();
-			int src_i = sg.index(src);
-			int to_i = sg.index(to);
+			src = sg.index(s);
+			to = sg.index(t);
 			mark = new boolean[g.V()];
-			path = new LinkedList<Integer>();
+			path = new int[g.V()];
 			q = new LinkedList<Integer>();
-			bfs(src_i, to_i);
+			bfs(src, to);
 	}	
 
 	private void bfs(int src, int to){
@@ -21,13 +22,12 @@ public class DegreeOfSeparation{
 		q.offer(src);
 		while(!q.isEmpty()){
 			int v = q.poll();
-//			path.add(v);
 			for(int i : sg.G().adj(v)){
 				if(!mark[i]){
 					mark[i] = true;
 					q.offer(i);
+					path[i] = v;
 					if(i == to){
-						path.add(i);
 						return;
 					}
 				}
@@ -37,8 +37,15 @@ public class DegreeOfSeparation{
 
 	public String toString(){
 		StringBuilder s = new StringBuilder();
-		for(int i : path){
-			s.append(sg.name(i) + "\n");
+		int i = to;
+		LinkedList<Integer> sta = new LinkedList<Integer>();
+		while(i != src){
+			sta.push(i);
+			i = path[i];
+		}
+		sta.push(src);
+		for(int t : sta){
+			s.append(sg.name(t) + "\n");
 		}
 		return s.toString();
 	}

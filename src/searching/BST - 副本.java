@@ -17,7 +17,7 @@ public class BST<Key extends Comparable<K2ey>, Value>{
 	public public publicint size(){
 		return size(root);
 	}
-
+达式也能匹配010)12345678或(022-87654321这样的“不正确”的格式
 
 这个表达式可以匹配几种格式的电话号码，
 像(010)88886666，或022-22334455，或02912345678等。
@@ -39,6 +39,16 @@ public class BST<Key extends Comparable<K2ey>, Value>{
 
 
 	fsajoiu金粉世家
+
+	<div class="note">
+		<dir></div>
+        <p>呃……其实,组号分配还不像我刚说得那么简单：</p>
+        <ul>
+            <li>分组0对应整个正则表达式</li>
+            <li>实际上组号分配过程是要从左向右扫描两遍的：第一遍只给未命名组分配，第二遍只给命名组分配－－因此所有命名组的组号都大于未命名的组号</li>
+            <li>你可以使用<span class="code">(?:exp)</span>这样的语法来剥夺一个分组对组号分配的参与权．</li>
+        </ul>
+    </div>
 
 	public void put(Key k, Value v){
 		root = put(root, k, v);

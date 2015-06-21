@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/*
+ * 可达性
+ * 从一个或者多个定点到图中其它顶点
+ */
 public class DirectedDFS{
 	private boolean[] mark;
 
@@ -14,11 +18,20 @@ public class DirectedDFS{
 			dfs(g, i);
 	}
 
+	public DirectedDFS(Digraph g, int i) {
+		mark = new boolean[g.V()];
+			dfs(g, i);
+	}
+
 	private void dfs(Digraph g, int s){
 		mark[s] = true;
 		for(int i : g.adj(s))
 			if(!mark[i])
 				dfs(g, i);
+	}
+
+	public boolean mark(int v){
+		return mark[v];
 	}
 	
 	public String toString(){

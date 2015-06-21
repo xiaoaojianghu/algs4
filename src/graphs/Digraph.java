@@ -25,7 +25,6 @@ public class Digraph{
 	}
 	public void addEdge(int v, int w){
 		list[v].add(w);
-		e++;
 	}
 
 
